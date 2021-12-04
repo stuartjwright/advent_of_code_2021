@@ -10,7 +10,7 @@ num_codes, num_bits = grid.shape
 
 # Part 1
 gamma = int(''.join(str(bit) for bit in (grid.sum(axis=0) > num_codes // 2).astype(int)), base=2)
-epsilon = gamma ^ int('1' * num_bits, base=2)
+epsilon = gamma ^ 2 ** num_bits - 1
 solution = gamma * epsilon
 print(f'Part 1 Solution: {solution}')
 
