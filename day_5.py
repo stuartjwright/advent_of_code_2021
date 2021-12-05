@@ -9,12 +9,12 @@ starts, ends = zip(*coords)
 starts = [tuple(map(int, start.split(','))) for start in starts]
 ends = [tuple(map(int, end.split(','))) for end in ends]
 
-# Create numpy array of zeroes large enough to cover all lines
+# Create numpy array of zeros large enough to cover all lines
 x_dim = max([start[0] for start in starts] + [end[0] for end in ends]) + 1
 y_dim = max([start[1] for start in starts] + [end[1] for end in ends]) + 1
 grid = np.zeros(shape=(y_dim, x_dim), dtype=int)
 
-# Part 1 solution: add 1 for each cell that falls on a horizontal or vertical lines
+# Part 1 solution: add 1 for each cell that falls on a horizontal or vertical line
 for start, end in zip(starts, ends):
     x1, y1 = start
     x2, y2 = end
@@ -33,7 +33,7 @@ solution = (grid >= 2).sum()
 print(f'Part 1 Solution: {solution}')
 
 
-# Part 2 solution: add diagonal lines to the grid that already has horizontal and verticals
+# Part 2 solution: add diagonal lines to the same grid
 for start, end in zip(starts, ends):
     x1, y1 = start
     x2, y2 = end
