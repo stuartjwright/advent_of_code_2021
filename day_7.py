@@ -3,7 +3,7 @@ from functools import cache
 from typing import Callable
 
 
-def get_data(path: str, filename: str):
+def get_data(path: str, filename: str) -> list[int]:
     """Reads a text file containing comma-separated integers, and returns a
     list of integers. Each integer represents one crab and its initial horizontal position.
 
