@@ -1,5 +1,5 @@
 import os
-from collections import defaultdict, Counter
+from collections import Counter
 
 with open(os.path.join('data', 'day_8.txt'), 'r') as f:
     data = [line.strip().split('|') for line in f.readlines()]
