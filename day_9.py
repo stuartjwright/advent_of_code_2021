@@ -2,6 +2,8 @@ import os
 import numpy as np
 from itertools import product
 
+
+# Data is a 2d-grid of single-digit ints, read them into 2d numpy array
 with open(os.path.join('data', 'day_9.txt'), 'r') as f:
     grid = np.array([list(line.strip()) for line in f.readlines()], dtype=int)
 
@@ -43,8 +45,7 @@ low_point_indices = np.argwhere(total_lower_neighbours == 4)
 basins = []
 for i, j in low_point_indices:
     basin = set()
-    value = padded[i, j]
-    add_neighbours(padded, i, j, value)
+    add_neighbours(padded, i, j, padded[i, j])
     basins.append(len(basin))
 
 size_3, size_2, size_1 = sorted(basins)[-3:]

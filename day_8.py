@@ -1,6 +1,8 @@
 import os
 from collections import Counter
 
+
+# Read in data, one list item per line, each list item split into input/output
 with open(os.path.join('data', 'day_8.txt'), 'r') as f:
     data = [line.strip().split('|') for line in f.readlines()]
 
