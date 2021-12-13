@@ -9,9 +9,9 @@ with open(os.path.join('data', 'day_13.txt'), 'r') as f:
     folds = [(line.split('=')[0][-1], int(line.split('=')[1])) for line in folds.split('\n')]
 
 # Create grid of required dimensions
+x_dim = 2 * max(fold[1] for fold in folds if fold[0] == 'x') + 1
+y_dim = 2 * max(fold[1] for fold in folds if fold[0] == 'y') + 1
 x_coords, y_coords = zip(*coords)
-x_dim = max(x_coords) + 1
-y_dim = max(y_coords) + 3  # Added a couple of extra rows so that all folds in my dataset were exactly in half
 grid = np.zeros((y_dim, x_dim), dtype=bool)
 grid[y_coords, x_coords] = 1
 
