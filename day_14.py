@@ -1,6 +1,7 @@
 import os
 import re
 from collections import Counter
+from functools import cache
 
 
 with open(os.path.join('data', 'day_14.txt'), 'r') as f:
@@ -30,6 +31,22 @@ solution = max(counter.values()) - min(counter.values())
 print(f'Part 1 Solution: {solution}')
 
 
-# Part 2 - 40 iterations is too many to brute force, need to find some counting algorithm instead
-polymer = template
+# Part 2 - 40 iterations is too many to build string, need to recursively count insertions instead
+@cache
+def get_counts(pair, n=0):
+    """For a pair of letters, return the character counts after 40 iterations of growth."""
+    if n == 40:
+        return Counter()
+    insertion = insertions[pair]
+    new_pair_1 = pair[0] + insertion
+    new_pair_2 = insertion + pair[1]
+    return Counter(insertion) + get_counts(new_pair_1, n+1) + get_counts(new_pair_2, n+1)
 
+
+polymer = template
+pairs = [polymer[i:i+2] for i in range(len(polymer)-1)]
+counter = Counter(polymer)
+for pair in pairs:
+    counter += get_counts(pair)
+solution = max(counter.values()) - min(counter.values())
+print(f'Part 2 Solution: {solution}')
