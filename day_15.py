@@ -1,5 +1,3 @@
-# Probably not the intended solution as part 2 took an hour to run, but it worked.
-
 import os
 import numpy as np
 from queue import PriorityQueue
@@ -11,13 +9,14 @@ from collections import defaultdict
 # Adapted as follows:
 #  - Used dicts rather than lists to only store necessary edges rather than lots of -1s to denote unconnected vertices.
 #  - Set a weight for each direction rather than same weight in each direction.
+#  - Used a set rather than a list to keep track of visited vertices for significant speed improvement
 
 
 class Graph:
     def __init__(self, num_of_vertices):
         self.v = num_of_vertices
         self.edges = defaultdict(dict)
-        self.visited = []
+        self.visited = set()
 
     def add_edge(self, u, v, weight):
         self.edges[u][v] = weight
@@ -32,7 +31,7 @@ def dijkstra(graph, start_vertex):
 
     while not pq.empty():
         (dist, current_vertex) = pq.get()
-        graph.visited.append(current_vertex)
+        graph.visited.add(current_vertex)
 
         for neighbor in graph.edges[current_vertex]:
             distance = graph.edges[current_vertex][neighbor]
@@ -102,7 +101,6 @@ for i in range(num_repeats):
         for _ in range(iterations):
             grid = np.where(grid == 9, 1, grid + 1)
         data[y_start:y_end, x_start:x_end] = grid
-
 
 g = construct_graph_from_grid(data)
 shortest_distance = dijkstra(g, 0)[g.v-1]
