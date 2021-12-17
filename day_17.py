@@ -4,7 +4,7 @@ from itertools import product
 from typing import Optional
 
 
-# Read data from file and extra the four required values
+# Read data from file and extract the four required values
 with open(os.path.join('data', 'day_17.txt'), 'r') as f:
     string = f.read().strip()
 pattern = r'target area: x=(-?\d+)\.\.(-?\d+), y=(-?\d+)\.\.(-?\d+)'
